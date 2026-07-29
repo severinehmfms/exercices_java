@@ -20,12 +20,13 @@ public class TP1Game extends Exception{
 		int min = 1;
 		int max = 100;
 		
+		//Utilisation de la fonction input_yes_no pour recevoir oui/o ou non/n 
 		String input_start = input_yes_no("Bonjour souhaitez vous jouer à mon jeu O/N ?");
 		
 		// Tant que l'utilisateur accepte de jouer/rejouer
 		while (input_start.equals("oui") || input_start.equals("o")) {
 			// On démarre une nouvelle partie
-			new_game(min, max, scanner);
+			new_game(min, max);
 			
 			System.out.println("Voulez-vous rejouer ? O/N");
 			input_start = scanner.nextLine();
@@ -40,7 +41,7 @@ public class TP1Game extends Exception{
 	 * @param max
 	 * @param scanner
 	 */
-	public static void new_game(int min,int max,Scanner scanner){
+	public static void new_game(int min,int max){
 		Random random = new Random();
 		int random_nb = random.nextInt((max - min) + 1) + min;
 		Boolean is_nb_found = false;	

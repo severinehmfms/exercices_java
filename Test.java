@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Séverine Hori Maitrehut
+ * Classe correspondant à l'exercice 3 DEV Java
+ */
 
 public class Test extends Exception{
 	

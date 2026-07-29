@@ -1,5 +1,8 @@
 
-
+/**
+ * Séverine Hori Maitrehut
+ * Classe correspondant à l'exercice 4 DEV Java - Partie 1
+ */
 
 public class BaseEx4Array{
 	

@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * Séverine Hori Maitrehut
+ * Classe correspondant au TP1 - DEV Java
+ */
+
 public class TP1Game extends Exception{
 	/**
 	 * Classe TP1Game 
@@ -8,8 +13,34 @@ public class TP1Game extends Exception{
 	 * @param args
 	 */
 	
+	private static Scanner scanner = new Scanner(System.in);
+	
+	
+	public static void main(String[] args){
+		int min = 1;
+		int max = 100;
+		
+		String input_start = input_yes_no("Bonjour souhaitez vous jouer à mon jeu O/N ?");
+		
+		// Tant que l'utilisateur accepte de jouer/rejouer
+		while (input_start.equals("oui") || input_start.equals("o")) {
+			// On démarre une nouvelle partie
+			new_game(min, max, scanner);
+			
+			System.out.println("Voulez-vous rejouer ? O/N");
+			input_start = scanner.nextLine();
+		}
+		System.out.println("Au-revoir !");
+		
+	}
+	
+	/**
+	 * Fonction qui démarre une nouvelle partie du jeu
+	 * @param min
+	 * @param max
+	 * @param scanner
+	 */
 	public static void new_game(int min,int max,Scanner scanner){
-		/** Fonction qui démarre une nouvelle partie**/
 		Random random = new Random();
 		int random_nb = random.nextInt((max - min) + 1) + min;
 		Boolean is_nb_found = false;	
@@ -36,28 +67,32 @@ public class TP1Game extends Exception{
 		}
 	}
 	
-	public static void main(String[] args){
-		Scanner scanner = new Scanner(System.in);
-		int min = 1;
-		int max = 100;
-		try {
-			System.out.println("Bonjour souhaitez vous jouer à mon jeu O/N ?");
-			String input_start = scanner.nextLine();
-			input_start = input_start.toLowerCase();
-			// Tant que l'utilisateur accepte de jouer
-			while (input_start.equals("oui") || input_start.equals("o")) {
-				// On démarre une nouvelle partie
-				new_game(min, max, scanner);
-				System.out.println("Voulez-vous rejouer ? O/N");
-				input_start = scanner.nextLine();
+	
+	/** 
+	 * Fonction qui permet de demander une saisie à l'utilisateur : Attendu oui non o n (peu importe la casse)
+	 * prompt = Prompt qui demande à l'utilisateur de saisir 
+	 */
+	public static String input_yes_no(String prompt) {
+		boolean is_input_ok = false;
+		String input_user = "";
+		while (!is_input_ok) {
+			System.out.println(prompt);
+			input_user = scanner.nextLine();
+			//On enlève les espaces
+			input_user = input_user.trim();
+			//On met en minuscules
+			input_user = input_user.toLowerCase();
+			if (input_user.trim().isEmpty()) {
+				System.out.println("La saisie ne peut pas être à vide");
+				is_input_ok = false;
+			}else if (!input_user.equals("oui") && !input_user.equals("o") && !input_user.equals("non") && !input_user.equals("n"))  {
+				System.out.println("Saisie incorrecte");
+				is_input_ok = false;
+			}else {		
+				is_input_ok = true;
 			}
-			System.out.println("Au-revoir !");
-		} catch (Exception e) {
-			System.out.println("Erreur" + e);
-		} finally {
-			scanner.close();
 		}
-		
-		
+		return input_user;
 	}
+	
 }

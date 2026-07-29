@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Collections;
 
+/**
+ * Séverine Hori Maitrehut
+ * Classe correspondant à l'exercice 4 DEV Java - Partie 2
+ */
+
 public class StudentManagement{
 	
 	private static Scanner scanner = new Scanner(System.in);

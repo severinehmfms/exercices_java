@@ -2,6 +2,11 @@ import java.util.List;
 import java.lang.String;
 import java.util.Scanner;
 
+/**
+ * Séverine Hori Maitrehut
+ * Classe correspondant à l'exercice 5 DEV Java
+ */
+
 public class BaseEx5String{
 	
 	private static Scanner scanner = new Scanner(System.in);

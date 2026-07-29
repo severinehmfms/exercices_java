@@ -25,14 +25,13 @@ public class BaseEx5String{
 		}
 		
 		//5.3 Remplacer le mot trouvé par un autre saisi par l'utilisateur
-		//String new_word = input_string("Par quel mot voulez vous remplacer " + word_to_replace + " ? ");
+		String new_word = input_string("Par quel mot voulez vous remplacer " + word_to_replace + " ? ");
 		//String new_sentence = sentence.replaceAll("Beau", new_word);
-		//String new_sentence = sentence.replaceFirst(word_to_replace.toLowerCase(), new_word.toLowerCase());
-	    //System.out.println(new_sentence);
+		String new_sentence = sentence.replaceFirst(word_to_replace.toLowerCase(), new_word.toLowerCase());
+	    System.out.println(new_sentence);
 	    
 	    //5.4 et 5.5 
 	    String palindrome = "Elu par cette crapule";
-	    //palindrome = "kayak";
 	    if (is_palindrome(palindrome)) {
 	    	System.out.println(palindrome + " est un palindrome");
 	    }else {
@@ -61,26 +60,20 @@ public class BaseEx5String{
 	 * @return
 	 */
 	public static boolean is_palindrome(String my_sentence){
-		System.out.println("Fonction is_palindrome");
+		//On enlève les espaces
 		my_sentence = my_sentence.replaceAll("\\s+", "");
+		//On met en minuscules
 		my_sentence = my_sentence.toLowerCase();
 		int gauche = 0;
 		int droite = my_sentence.length() - 1;
 		
 		
 		while (gauche < droite) {
-			System.out.println("gauche " + String.valueOf(gauche));
-			System.out.println("droite " + String.valueOf(droite));
-		
-			System.out.println("Caractère de gauche " + my_sentence.charAt(gauche));
-			System.out.println("Caractère de droite " + my_sentence.charAt(droite));
 			if (my_sentence.charAt(gauche) != my_sentence.charAt(droite)) {
-				
-				
 				return false;
 			}
-			gauche = gauche + 1;
-			droite = droite - 1;
+			gauche++;
+			droite--;
 		}
 		
 		return true;

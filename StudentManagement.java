@@ -268,7 +268,6 @@ public class StudentManagement{
 		
 		//On va maintenant trier ce tableau
 		int indice_min;
-		int indice_max;
 		
 		//On parcoure une première fois le tableau avec l'indice i
 		for (int i = 0 ; i < array_students.length ; i ++ ) {
@@ -283,6 +282,9 @@ public class StudentManagement{
 				if (sens_tri.equals("croissant")) {
 					//On va comparer la première lettre de array_students[j] avec celle de array_students[index_min] (qui est égal à celui de i en cours)
 					//if (array_students[j].charAt(0) < array_students[indice_min].charAt(0)) {
+					//Finalement j'utilise compareToIgnoreCase qui permet de comparer deux chaines sans tenir compte de la casse
+					//Cette fonction renvoie 0 si les deux chaines sont égales, renvoie un chiffre inférieur à 0 si chaine 1 < chaine 2 (dans le sens de l'ordre)
+					//Et renvoie un chiffre supérieur à 0 si chaine 1 > chaine 2, ce qui permet de ne pas comparer QUE la première lettre
 					if (array_students[j].compareToIgnoreCase(array_students[indice_min]) < 0) {
 						//Si tri croissant - Si la première lettre de l'élève de l'indice j est plus petite que celle de l'élève de indice_min, on met j comme indice_min
 						indice_min = j;

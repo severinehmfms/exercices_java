@@ -5,6 +5,12 @@
  */
 
 public class Matrix {
+	/**
+	 * Classe Matrix 
+	 * Jeu qui permet d'additionner des matrices, de soustraire une matrice à une autre, et de multiplier une matrice par un entier.
+	 * @param args
+	 */
+	
 	
 	public static void main(String[] args){
 		int[][] firstMatrix = { {5, 2, 4} ,
@@ -46,6 +52,11 @@ public class Matrix {
 		}
 	}
 	
+	/**
+	 * Fonction qui permet d'additionner deux matrices a et b passées en paramètres
+	 * @param a
+	 * @param b
+	 */
 	public static void addMatrix(int[][] a, int[][] b){
 		int nb_lignes = a.length;
 		int nb_colonnes = (nb_lignes > 0) ? a[0].length : 0;
@@ -90,6 +101,11 @@ public class Matrix {
 		}
 	}
 	
+	/**
+	 * Fonction qui permet de soustraire une matrice b d'une matrice a ; les deux matrices passées en paramètres
+	 * @param a
+	 * @param b
+	 */
 	public static void subMatrix(int[][] a, int[][] b){
 		int nb_lignes = a.length;
 		int nb_colonnes = (nb_lignes > 0) ? a[0].length : 0;
@@ -132,6 +148,11 @@ public class Matrix {
 		}
 	}
 	
+	/**
+	 * Fonction qui permet de multiplier une matrice a par un entier b ; a et b passés en paramètres
+	 * @param a
+	 * @param b
+	 */
 	public static void mulMatrix(int[][] a, int b){
 		int nb_lignes = a.length;
 		int nb_colonnes = (nb_lignes > 0) ? a[0].length : 0;

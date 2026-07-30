@@ -42,7 +42,8 @@ public class BaseEx5String{
 	    	System.out.println(palindrome + " n'est un palindrome");
 	    }
 		
-		
+	  //On referme le scanner
+	  scanner.close();
 	}	
 	
 	/**
@@ -71,7 +72,7 @@ public class BaseEx5String{
 		int gauche = 0;
 		int droite = my_sentence.length() - 1;
 		
-		
+		//On compare de l'extérieur vers l'intérieur les lettres et on s'arrête quand on arrive à la lettre du milieu
 		while (gauche < droite) {
 			if (my_sentence.charAt(gauche) != my_sentence.charAt(droite)) {
 				return false;

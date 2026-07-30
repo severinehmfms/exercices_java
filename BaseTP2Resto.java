@@ -9,21 +9,7 @@ public class BaseTP2Resto{
 	private static Scanner scanner = new Scanner(System.in);	
 	private static int nb_choix = 5;
 	
-	/*
-	private static enum Entree {
-		SALADE("Salade"), SOUPE("Soupe"), QUICHE("Quiche"), AUCUNE("Aucune");
-		
-		private final String description;
-
-		Entree(String description) {
-		this.description = description;
-		}
-
-		public String getDescription() {
-		return description;
-		}
 	
-	}*/
 	private static enum Entree {
 		SALADE, SOUPE, QUICHE, AUCUNE
 	}
@@ -41,30 +27,33 @@ public class BaseTP2Resto{
 		}
 	
 	
-	public static void main(String[] args){		
-		
-		//Test enum description
-		//Entree salade = Entree.SALADE;
-		//System.out.println(salade.getDescription());
-		
+	public static void main(String[] args){
 		//On demande à l'utilisateur combien de menus il veut commander
 		int nb_menus = input_int("Bonjour, combien de menus souhaitez vous ?", 1, 10);
 		int [][] commandes = new int [nb_menus][nb_choix];
+		
+		//Pour chaque commande que souhaite faire l'utilisateur
 		for (int i = 0; i < nb_menus; i++) {
 			System.out.println("Commande numéro " + (i+1) + " : ");
 			
 			//On appelle la fonction qui demande à l'utilisateur sa commande			
 			int [] commande = commande_menu();
+			
 			//On rajoute la commande dans le tableaux des commandes
 			commandes[i] = commande;
-			//On affiche le résumé de la commande pour ce menu là
-			print_resume_subcommande(commandes[i],i+1);
+			
+			//On affiche le résumé de la commande (i+1)
+			print_resume_commande(commandes[i],i+1);
 		}
 		
 		//On referme le scanner
 		scanner.close();
 	}
-		
+	
+	/**
+	 * Méthode qui permet de demander et scanner ses choix à l'utilisateur, pour une commande
+	 * @return
+	 */
 	public static int[] commande_menu(){
 		//On demande à l'utilisateur son choix pour l'entrée
 		System.out.print("Choix entrée : ");
@@ -86,6 +75,12 @@ public class BaseTP2Resto{
 		return commande;
 	}
 	
+	/**
+	 * Méthode qui permet de proposer les items d'un enum (exemple proposer les entrées possibles pour une entrée), et de scanner le résultat de l'utilisateur 
+	 * @param prompt
+	 * @param choix
+	 * @return
+	 */
 	public static int input_choice_item(String prompt, Enum[] choix) {
 		int item_chosen;
 		String item_str = "";
@@ -111,81 +106,77 @@ public class BaseTP2Resto{
 	 * @return
 	 */
 	public static int input_int(String prompt, int min_val, int max_val) {
-		int input_int_user;
-		System.out.println(prompt);
-		input_int_user = scanner.nextInt();
-		while (input_int_user > max_val || input_int_user < min_val) {
-			System.out.println("Le chiffre entré doit être entre " + min_val + " et " + max_val);
-			input_int_user = scanner.nextInt();
-		}
+		int input_int_user = 0;
+		boolean is_valid_input = false;
+	    while (!is_valid_input) {
+	    	System.out.println(prompt);
+	    	String input_user = scanner.nextLine();
+
+	        if (input_user.matches("\\d+")) {
+	        	input_int_user = Integer.parseInt(input_user);
+
+	            if (input_int_user >= min_val && input_int_user <= max_val) {
+	            	is_valid_input = true;
+	            } else {
+	            	System.out.println("Le nombre doit être compris entre " + min_val + " et " + max_val);
+	            }
+	        } else {
+	            System.out.println("Vous devez saisir un entier.");
+	        }
+	    }
 		return input_int_user;
 	}
 	
-	/** 
-	 * Méthode générique pour afficher un tableau simple
-	 * @param tab
-	 */
-	public static void print_tab(int[] tab) {
-		for (int valeur : tab) {
-            System.out.print(valeur + " ");
-        }
-		System.out.println();
-	}
 	
 	/**
-	 * Méthode qui va afficher le résumé du menu de l'utilisateur
+	 * Méthode qui va afficher le résumé de la commande pour un menu de l'utilisateur
 	 * @param commande
 	 */
-	public static void print_resume_subcommande(int[] commande, int num_commande) { 
+	public static void print_resume_commande(int[] commande, int num_commande) { 
 		System.out.println("Résumé de la commande " + num_commande + " : ");
 		String resume = "[";
 		for (int i = 0; i < commande.length; i++) {
 			switch (i) {
 				case 0:
 					if (!Entree.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Entree.values()[commande[i]];
-						
-						if ( (!resume.endsWith("[")) && (!resume.endsWith(",")) ) {
-							resume += " ";
-						}
+						resume += Entree.values()[commande[i]] + " ";
 					}
 					break;
 				case 1:
 					if (!Plat.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Plat.values()[commande[i]];
-						
-						if ( (!resume.endsWith("[")) && (!resume.endsWith(",")) ) {
-							resume += " ";
-						}
+						resume += Plat.values()[commande[i]] + " ";
 					}
 					break;
 				case 2:
 					if (!Accompagnement.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Accompagnement.values()[commande[i]];
-						
-						if ( (!resume.endsWith("[")) && (!resume.endsWith(",")) ) {
-							resume += " ";
-						}
+						resume += Accompagnement.values()[commande[i]] + " ";
 					}
 					break;
 				case 3:
 					if (!Boisson.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Boisson.values()[commande[i]];
-						
-						if ( (!resume.endsWith("[")) && (!resume.endsWith(",")) ) {
-							resume += ",";
-						}
+						resume += Boisson.values()[commande[i]] + " ";
 					}
 					break;
 				case 4:
 					if (!Dessert.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Dessert.values()[commande[i]];
+						resume += Dessert.values()[commande[i]] + " ";
 					}
 					break;
 			}
 		}
-		resume += "]";
+		//On remplace si plusieurs espaces par un seul espace (en cas de beaucoup de AUCUN/AUCUNE choisis)
+		//resume = resume.replace("  ", " ");
+		resume = resume.replaceAll("\\s+", " ");
+		//On remplace les espaces par des virgules
+		resume = resume.replace(" ", ",");
+		//Si le résumé se termine par une virgule on supprime la virgule finale
+		if (resume.endsWith(",")) {
+			resume = resume.substring(0, resume.length() - 1);
+		}
+		//On remplace l'underscore (utilisé dans les enum) par un espace pour un affichage plus propre
 		resume = resume.replace('_', ' ');
+		//Et pour finir on rajoute le crochet fermé pour l'affichage
+		resume += "]";
 		System.out.println(resume);
 	}
 	

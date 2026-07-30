@@ -75,6 +75,9 @@ public class StudentManagement{
 					break;
 			}	
 		}
+		
+		//On referme le scanner
+		scanner.close();
 	}
 	
 	/**

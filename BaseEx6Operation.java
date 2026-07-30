@@ -18,6 +18,16 @@ public class BaseEx6Operation{
 		
 		//Exercice 6.2
 		print_tree(13);
+		
+		//Exercice 6.3
+		double [] tab = { 78, 6, -250, 2, 12, 9 };
+		double totalmax = get_total_max(tab);
+		System.out.println(Double.toString(totalmax));
+		
+		//Exercice 6.4
+		//Voir classe Matrice
+		
+		
 	}
 	
 	/**
@@ -64,6 +74,27 @@ public class BaseEx6Operation{
 		return a * b;
 	}
 	
+	
+	public static double get_total_max(double[] my_tab) {
+		//On va rechercher les deux chiffres maximaux dans le tableau
+		double nb_max = 0;
+		double nb_max2 = 0;
+		for (int i = 0 ; i < my_tab.length ; i++) {
+			//Si la case en cours a une valeur supérieur à nb_max, nb_max prend la valeur de la case en cours, et nb_max2 prend la valeur de nb_max
+			//De cette façon, nb_max sera toujours la valeur la plus élevée (en cours), et nb_max2 prend la valeur suivante la plus élevée
+			if (my_tab[i] > nb_max) { 
+				nb_max2 = nb_max; 
+				nb_max = my_tab[i]; 
+			//Si la case en cours a une valeur supérieur à nb_max2, alors ce dernier prend la valeur de la case en cours
+			}else if (my_tab[i] > nb_max2) { 
+				nb_max2 = my_tab[i];
+			}
+		}
+		//On retourne la somme de ces deux chiffres
+		return nb_max + nb_max2;
+	}
+	
+	
 	/**
 	 * Fonction qui affiche un arbre dont la taille maxi est passée en paramètre et doit être impair
 	 */
@@ -91,6 +122,7 @@ public class BaseEx6Operation{
 	        }
 			System.out.println(tree);	
 		}
+		
 	}
 	
 	

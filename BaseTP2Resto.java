@@ -6,7 +6,9 @@
 public class BaseTP2Resto{
 	
 	
+	public static void main(String[] args){
 	
-	
-	
+		
+		
+	}	
 }

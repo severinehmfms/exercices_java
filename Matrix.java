@@ -1,5 +1,8 @@
 
-
+/**
+ * Séverine Hori Maitrehut
+ * Classe correspondant à l'exercice 6 - Partie 2 - DEV Java
+ */
 
 public class Matrix {
 	

@@ -33,6 +33,8 @@ public class TP1Game extends Exception{
 		}
 		System.out.println("Au-revoir !");
 		
+		//On referme le scanner
+		scanner.close();
 	}
 	
 	/**

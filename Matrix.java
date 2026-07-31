@@ -7,7 +7,7 @@
 public class Matrix {
 	/**
 	 * Classe Matrix 
-	 * Jeu qui permet d'additionner des matrices, de soustraire une matrice à une autre, et de multiplier une matrice par un entier.
+	 * Classe qui permet d'additionner des matrices, de soustraire une matrice à une autre, et de multiplier une matrice par un entier.
 	 * @param args
 	 */
 	

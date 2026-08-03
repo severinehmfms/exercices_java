@@ -25,6 +25,7 @@ public class BaseTP2Resto{
 		TARTE_MAISON, MOUSSE_AU_CHOCOLAT, TIRAMISU, AUCUN
 		}
 	
+	//Création d'un enum TypeRepas qui contient les types d'aliments pour faciliter la factorisation du code
 	private static enum TypeRepas {
 	    ENTREE("Entrée", Entree.values()),
 	    PLAT("Plat", Plat.values()),
@@ -49,10 +50,6 @@ public class BaseTP2Resto{
 	    }
 	}
 	
-	//private static String [] types_meal =  {"Entrée", "Plat", "Accompagnement", "Boisson", "Dessert"};
-	
-	
-	
 	public static void main(String[] args){
 		//On demande à l'utilisateur combien de menus il veut commander
 		int nb_menus = input_int("Bonjour, combien de menus souhaitez vous ?", 1, 10);
@@ -61,20 +58,15 @@ public class BaseTP2Resto{
 		//Pour chaque commande que souhaite faire l'utilisateur
 		for (int i = 0; i < nb_menus; i++) {
 			System.out.println("Commande numéro " + (i+1) + " : ");
-			
 			int [] commande = new int [TypeRepas.values().length];
+			
 			//Pour chaque type d'aliment, on demande à l'utilisateur ce qu'il veut commander
-			//for (int j = 0; j < types_meal.length; j++) {
 			int cptcommande = 0;
 			for (TypeRepas type : TypeRepas.values()) {
-				//System.out.print("Choix "+types_meal[j]+" : ");
-				
 				int choice_typemeal = input_choice_item("Que souhaitez vous comme "+type.getLibelle()+" ? [Saisir le chiffre correspondant] ", type);
 				commande[cptcommande] = choice_typemeal;
 				cptcommande ++ ;
 			}
-			//On appelle la fonction qui demande à l'utilisateur sa commande
-			//int [] commande = commande_menu();
 			
 			//On rajoute la commande dans le tableaux des commandes
 			commandes[i] = commande;
@@ -96,6 +88,7 @@ public class BaseTP2Resto{
 	public static int input_choice_item(String prompt, TypeRepas type_meal) {
 		int item_chosen;
 		String item_str = "";
+		//On récupère la liste des choix possibles pour le type d'aliment choisi (exemple pour les entrées, il y aura salade, soupe, quiche...)
 		Enum<?>[] choix = type_meal.getChoix();
 		
 		System.out.print("Choix "+type_meal.getLibelle()+" : ");
@@ -103,10 +96,9 @@ public class BaseTP2Resto{
 		for (int i = 0; i < choix.length; i++) {
 			//On remplace les _ par des espaces pour l'affichage
 			item_str = choix[i].name().replace('_', ' ');
-	        System.out.print("[" + (i + 1) + " - " + item_str  + "] ");	        
+	        System.out.print("[" + (i + 1) + " - " + item_str  + "] ");  
 	    }
 		System.out.println();
-		//item_chosen = scanner.nextInt();
 		item_chosen = input_int(prompt, 1, choix.length);
 		//On enlève 1 car les enums commencent à zéro pour stocker le bon indice
 		item_chosen --;
@@ -150,37 +142,19 @@ public class BaseTP2Resto{
 	public static void print_resume_commande(int[] commande, int num_commande) { 
 		System.out.println("Résumé de la commande " + num_commande + " : ");
 		String resume = "[";
-		for (int i = 0; i < commande.length; i++) {
-			switch (i) {
-				case 0:
-					if (!Entree.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Entree.values()[commande[i]] + " ";
-					}
-					break;
-				case 1:
-					if (!Plat.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Plat.values()[commande[i]] + " ";
-					}
-					break;
-				case 2:
-					if (!Accompagnement.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Accompagnement.values()[commande[i]] + " ";
-					}
-					break;
-				case 3:
-					if (!Boisson.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Boisson.values()[commande[i]] + " ";
-					}
-					break;
-				case 4:
-					if (!Dessert.values()[commande[i]].name().startsWith("AUCUN")){
-						resume += Dessert.values()[commande[i]] + " ";
-					}
-					break;
+		
+		
+		//Pour chaque type d'aliment on récupère le choix qui a été fait
+		int cptcommande = 0;
+		for (TypeRepas type : TypeRepas.values()) {
+			//Si le choix est aucun ou aucune on ne l'ajoute pas au résumé
+			if (!type.getChoix()[commande[cptcommande]].name().startsWith("AUCUN")){
+				resume += type.getChoix()[commande[cptcommande]] + " ";
 			}
+			cptcommande++;
 		}
+		
 		//On remplace si plusieurs espaces par un seul espace (en cas de beaucoup de AUCUN/AUCUNE choisis)
-		//resume = resume.replace("  ", " ");
 		resume = resume.replaceAll("\\s+", " ");
 		//On remplace les espaces par des virgules
 		resume = resume.replace(" ", ",");
@@ -190,7 +164,7 @@ public class BaseTP2Resto{
 		}
 		//On remplace l'underscore (utilisé dans les enum) par un espace pour un affichage plus propre
 		resume = resume.replace('_', ' ');
-		//Et pour finir on rajoute le crochet fermé pour l'affichage
+		//Et pour finir on rajoute le crochet fermé pour un joli affichage
 		resume += "]";
 		System.out.println(resume);
 	}

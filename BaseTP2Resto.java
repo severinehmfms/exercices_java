@@ -49,6 +49,10 @@ public class BaseTP2Resto{
 	    }
 	}
 	
+	//private static String [] types_meal =  {"Entrée", "Plat", "Accompagnement", "Boisson", "Dessert"};
+	
+	
+	
 	public static void main(String[] args){
 		//On demande à l'utilisateur combien de menus il veut commander
 		int nb_menus = input_int("Bonjour, combien de menus souhaitez vous ?", 1, 10);

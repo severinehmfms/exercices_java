@@ -9,7 +9,6 @@ public class BaseTP2Resto{
 	private static Scanner scanner = new Scanner(System.in);	
 	private static int nb_choix = 5;
 	
-	
 	private static enum Entree {
 		SALADE, SOUPE, QUICHE, AUCUNE
 	}
@@ -26,6 +25,29 @@ public class BaseTP2Resto{
 		TARTE_MAISON, MOUSSE_AU_CHOCOLAT, TIRAMISU, AUCUN
 		}
 	
+	private static enum TypeRepas {
+	    ENTREE("Entrée", Entree.values()),
+	    PLAT("Plat", Plat.values()),
+	    ACCOMPAGNEMENT("Accompagnement", Accompagnement.values()),
+	    BOISSON("Boisson", Boisson.values()),
+	    DESSERT("Dessert", Dessert.values());
+
+	    private final String libelle;
+	    private final Enum<?>[] choix;
+
+	    TypeRepas(String libelle, Enum<?>[] choix) {
+	        this.libelle = libelle;
+	        this.choix = choix;
+	    }
+
+	    public String getLibelle() {
+	        return libelle;
+	    }
+
+	    public Enum<?>[] getChoix() {
+	        return choix;
+	    }
+	}
 	
 	public static void main(String[] args){
 		//On demande à l'utilisateur combien de menus il veut commander
@@ -36,8 +58,19 @@ public class BaseTP2Resto{
 		for (int i = 0; i < nb_menus; i++) {
 			System.out.println("Commande numéro " + (i+1) + " : ");
 			
-			//On appelle la fonction qui demande à l'utilisateur sa commande			
-			int [] commande = commande_menu();
+			int [] commande = new int [TypeRepas.values().length];
+			//Pour chaque type d'aliment, on demande à l'utilisateur ce qu'il veut commander
+			//for (int j = 0; j < types_meal.length; j++) {
+			int cptcommande = 0;
+			for (TypeRepas type : TypeRepas.values()) {
+				//System.out.print("Choix "+types_meal[j]+" : ");
+				
+				int choice_typemeal = input_choice_item("Que souhaitez vous comme "+type.getLibelle()+" ? [Saisir le chiffre correspondant] ", type);
+				commande[cptcommande] = choice_typemeal;
+				cptcommande ++ ;
+			}
+			//On appelle la fonction qui demande à l'utilisateur sa commande
+			//int [] commande = commande_menu();
 			
 			//On rajoute la commande dans le tableaux des commandes
 			commandes[i] = commande;
@@ -51,43 +84,22 @@ public class BaseTP2Resto{
 	}
 	
 	/**
-	 * Méthode qui permet de demander et scanner ses choix à l'utilisateur, pour une commande
-	 * @return
-	 */
-	public static int[] commande_menu(){
-		//On demande à l'utilisateur son choix pour l'entrée
-		System.out.print("Choix entrée : ");
-		int choice_entree = input_choice_item("Que souhaitez vous comme entrée ? [Saisir le chiffre correspondant] ", Entree.values());
-		//On demande à l'utilisateur son choix pour le plat
-		System.out.print("Choix plat : ");
-		int choice_plat = input_choice_item("Que souhaitez vous comme plat ? [Saisir le chiffre correspondant] ", Plat.values());
-		//On demande à l'utilisateur son choix pour l'accompagnement
-		System.out.print("Choix accompagnement : ");
-		int choice_accompagnement = input_choice_item("Que souhaitez vous comme accompagnement ? [Saisir le chiffre correspondant] ", Accompagnement.values());
-		//On demande à l'utilisateur son choix pour la boisson
-		System.out.print("Choix boisson : ");
-		int choice_boisson = input_choice_item("Que souhaitez vous comme boisson ? [Saisir le chiffre correspondant] ", Boisson.values());
-		//On demande à l'utilisateur son choix pour le dessert
-		System.out.print("Choix dessert : ");
-		int choice_dessert = input_choice_item("Que souhaitez vous comme dessert ? [Saisir le chiffre correspondant] ", Dessert.values());
-		
-		int [] commande = {choice_entree, choice_plat, choice_accompagnement, choice_boisson, choice_dessert};
-		return commande;
-	}
-	
-	/**
 	 * Méthode qui permet de proposer les items d'un enum (exemple proposer les entrées possibles pour une entrée), et de scanner le résultat de l'utilisateur 
 	 * @param prompt
 	 * @param choix
 	 * @return
 	 */
-	public static int input_choice_item(String prompt, Enum[] choix) {
+	public static int input_choice_item(String prompt, TypeRepas type_meal) {
 		int item_chosen;
 		String item_str = "";
-		for (int i = 1; i < choix.length+1; i++) {
+		Enum<?>[] choix = type_meal.getChoix();
+		
+		System.out.print("Choix "+type_meal.getLibelle()+" : ");
+		
+		for (int i = 0; i < choix.length; i++) {
 			//On remplace les _ par des espaces pour l'affichage
-			item_str = choix[i-1].name().replace('_', ' ');
-	        System.out.print("[" + i + " - " + item_str  + "] ");
+			item_str = choix[i].name().replace('_', ' ');
+	        System.out.print("[" + (i + 1) + " - " + item_str  + "] ");	        
 	    }
 		System.out.println();
 		//item_chosen = scanner.nextInt();
@@ -95,7 +107,6 @@ public class BaseTP2Resto{
 		//On enlève 1 car les enums commencent à zéro pour stocker le bon indice
 		item_chosen --;
 	    return item_chosen;
-	    
 	}
 	
 	/**

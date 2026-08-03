@@ -28,8 +28,7 @@ public class BaseTP1Game extends Exception{
 			// On démarre une nouvelle partie
 			new_game(min, max);
 			
-			System.out.println("Voulez-vous rejouer ? O/N");
-			input_start = scanner.nextLine();
+			input_start = input_yes_no("Voulez-vous rejouer ? O/N");
 		}
 		System.out.println("Au-revoir !");
 		

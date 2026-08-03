@@ -142,8 +142,7 @@ public class BaseTP2Resto{
 	public static void print_resume_commande(int[] commande, int num_commande) { 
 		System.out.println("Résumé de la commande " + num_commande + " : ");
 		String resume = "[";
-		
-		
+				
 		//Pour chaque type d'aliment on récupère le choix qui a été fait
 		int cptcommande = 0;
 		for (TypeRepas type : TypeRepas.values()) {

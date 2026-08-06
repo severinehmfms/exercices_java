@@ -35,7 +35,14 @@ public class StudentManagement{
 
 		String choice_user = "";
 		while (!choice_user.equals("q")) {
-			System.out.println("\n MENU :\n 1: Saisir un élève et ses notes\n 2: Rechercher un élève \n 3: Afficher la liste \n 4: Afficher la liste dans l'ordre décroissant \n 5: Pareil mais à la mano \n 6: Ordre croissant à la mano \n Q: Quitter le programme ");
+			System.out.println("\n MENU :\n "
+					+ "1: Saisir un élève et ses notes\n "
+					+ "2: Rechercher un élève \n "
+					+ "3: Afficher la liste \n "
+					+ "4: Afficher la liste dans l'ordre décroissant \n "
+					+ "5: Pareil mais à la mano \n "
+					+ "6: Ordre croissant à la mano \n "
+					+ "Q: Quitter le programme ");
 			choice_user = scanner.nextLine();
 			choice_user = choice_user.toLowerCase();
 			switch(choice_user) {

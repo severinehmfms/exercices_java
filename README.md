@@ -1,5 +1,9 @@
+Séverine Hori Maitrehut
 
 Dépôt GIT correspondant aux exercices java
+Applications console développées en Java.
+Contraintes données par le formateur : interdiction de créer des objets, et d'utiliser des exceptions.
+
 
 - Exercice 1 : Hello.java
 - Exercice 2 et 3 : Test.java
